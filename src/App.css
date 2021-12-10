@@ -166,6 +166,10 @@ ul li a:hover {
     display: inline-block;
 }
 
+.marginLeft {
+    margin-right: 1% !important;
+}
+
 .marginleft {
     margin-left: -5%;
 }
@@ -264,4 +268,36 @@ ul li a:hover {
     padding: 2% 0% 2% 2%;
     width: 95%;
     text-align: center;
+}
+
+.restuarantMenu {
+    margin-top: 2%;
+    text-align: center;
+}
+
+.menuBtnAdjustment {
+    float: right;
+}
+
+.menuItemListData {
+    margin-top: 5%;
+}
+
+.menuItemList {
+    padding: 0.5% 2%;
+    border: 1px solid #DEDEDE;
+    border-radius: 5px;
+    background-color: #DEDEDE;
+}
+
+.itemMenu:nth-child(odd) {
+    padding: 1% 1%;
+    border: 1px solid #DEDEDE;
+    background-color: #FFFFFF;
+}
+
+.itemMenu:nth-child(even) {
+    padding: 1% 1%;
+    border: 1px solid #EFEFEF;
+    background-color: #EFEFEF;
 }

@@ -15,8 +15,9 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { cookies } from '../../utils/utils';
+import { toast } from 'react-toastify';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -73,8 +74,18 @@ const Header = ()=> {
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
-
-  const handleMenuClose = () => {
+  const history = useNavigate();
+  const handleMenuClose = (menuName) => {
+    if(menuName==="restaurant"){
+      if(cookies.get("login") === "true"){
+        history('/resturant');
+      }else{
+          toast.error("Please sign in.")
+          history('/');
+      }
+      
+  }
+    
     setAnchorEl(null);
     handleMobileMenuClose();
   };
@@ -94,7 +105,8 @@ const Header = ()=> {
       'aria-labelledby': 'basic-button',
     }}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={()=>{
+        handleMenuClose('restaurant')}}>Restaurant</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
