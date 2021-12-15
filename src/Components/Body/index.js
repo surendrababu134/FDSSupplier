@@ -4,7 +4,7 @@ import SignUp from './SignUp';
 import SignIn from './SignIn';
 import Restaurent from './Restaurant';
 import Menus from './Menu';
-import MenuItem from './MenuItems';
+import MenuItems from './MenuItems';
 const Body = () => {
     return (
         <div className="bodyCSS">
@@ -15,7 +15,7 @@ const Body = () => {
             <Route path="/signin" element={<SignIn />} />
             <Route path='/resturant' element={<Restaurent />} />
             <Route path='/menus' element={<Menus />} />
-            <Route path='/menuitems' element={<MenuItem />} />
+            <Route path='/menuitems' element={<MenuItems />} />
             </Routes>
             
         </div>

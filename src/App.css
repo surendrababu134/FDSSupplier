@@ -301,3 +301,26 @@ ul li a:hover {
     border: 1px solid #EFEFEF;
     background-color: #EFEFEF;
 }
+
+.blockValue {
+    display: block !important;
+    width: 100%;
+    border-bottom: 1px solid #DEDEDE;
+    padding: 2%;
+}
+
+.floatLeftWidth {
+    float: left !important;
+    width: 30%;
+    display: inline-block;
+}
+
+.floatLeftWidth-70 {
+    float: left !important;
+    width: 70%;
+    display: inline-block;
+}
+
+.cursorPointer {
+    cursor: pointer;
+}
