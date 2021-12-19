@@ -192,7 +192,7 @@ const MenuItems = () => {
             variant="standard"
             sx={{ m: 1, minWidth: 120 }}
           >
-            <InputLabel id="demo-simple-select-standard-label">Age</InputLabel>
+            <InputLabel id="demo-simple-select-standard-label">Menu</InputLabel>
             <Select
               labelId="demo-simple-select-standard-label"
               id="demo-simple-select-standard"
@@ -200,7 +200,7 @@ const MenuItems = () => {
               onChange={(e) => {
                 setItemMenuId(e.target.value);
               }}
-              label="Age"
+              label="Menu"
             >
               {itemList.map((item, index) => {
                 return (
