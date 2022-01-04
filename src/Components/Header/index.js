@@ -81,7 +81,7 @@ const Header = ()=> {
         history('/resturant');
       }else{
           toast.error("Please sign in.")
-          history('/');
+          history('/signup');
       }
       
   }
