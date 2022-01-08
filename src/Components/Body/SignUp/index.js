@@ -36,6 +36,12 @@ const SignUp = () => {
     }
   }, [data]);
 
+  useEffect(()=>{
+    if (cookies.get("login") !== "true" && !cookies.get('USR_VLE')) {
+      history("/signup");
+    }
+  },[]);
+
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword)
   };

@@ -16,7 +16,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { cookies } from '../../utils/utils';
+import { cookies, removeAllCookies } from '../../utils/utils';
 import { toast } from 'react-toastify';
 
 const Search = styled('div')(({ theme }) => ({
@@ -85,6 +85,10 @@ const Header = ()=> {
       }
       
   }
+  if(menuName === 'logout'){
+    removeAllCookies();
+    history('/signup');
+  }
     
     setAnchorEl(null);
     handleMobileMenuClose();
@@ -108,6 +112,8 @@ const Header = ()=> {
       <MenuItem onClick={()=>{
         handleMenuClose('restaurant')}}>Restaurant</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={()=>{
+        handleMenuClose('logout')}}>Logout</MenuItem>
     </Menu>
   );
 

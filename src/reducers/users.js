@@ -1,14 +1,18 @@
 import * as types from '../constants';
 const initialState = {
-    data:{}
+    data:{},
+    signInData:{}
 };
 
 function configReducer(state = initialState, action) {
     switch (action.type) {
         case types.SIGN_UP:
-            console.log(action)
             return {
                 ...state, data: action.data
+            }
+        case types.SIGN_IN:
+            return {
+                ...state, signInData: action.data
             }
         default:
             return state;
