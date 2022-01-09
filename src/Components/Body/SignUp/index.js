@@ -20,6 +20,7 @@ const SignUp = () => {
     userName: "",
     password: "",
     confirmPassword: "",
+    email:""
   });
   const [showPassword,setShowPassword] = useState(false)
   const [showConfirmPassword,setShowConfirmPassword] = useState(false)
@@ -67,11 +68,15 @@ const SignUp = () => {
       if (signUpObject.password) {
         if (signUpObject.confirmPassword) {
           if (signUpObject.password === signUpObject.confirmPassword) {
-            signUpObject.createDate = new Date().getTime();
-            signUpObject.modifiedDate = new Date().getTime();
-            signUpObject.createdBy = "admin";
-            signUpObject.modifiedBy = "admin";
-            dispatch(signUpAction(signUpObject));
+            if (signUpObject.confirmPassword) {
+              signUpObject.createDate = new Date().getTime();
+              signUpObject.modifiedDate = new Date().getTime();
+              signUpObject.createdBy = "admin";
+              signUpObject.modifiedBy = "admin";
+              dispatch(signUpAction(signUpObject));
+            }else{
+              toast.error("Please fill email.");
+            }
           } else {
             toast.error("Password is not matching with confirm password.");
           }
@@ -91,7 +96,8 @@ const SignUp = () => {
         <h1 className="alignMentCenter">SIGN UP</h1>
         <div className="divField">
           <TextField
-            type="email"
+          required
+            type="text"
             className="width-90"
             id="standard-basic"
             label="User Name"
@@ -109,6 +115,7 @@ const SignUp = () => {
         </div>
         <div className="divField">
           <TextField
+          required
             type={showPassword?"text":"password"}
             className="width-90"
             id="standard-basic"
@@ -132,6 +139,7 @@ const SignUp = () => {
         </div>
         <div className="divField">
           <TextField
+          required
             type={showConfirmPassword?"text":"password"}
             className="width-90"
             id="standard-basic"
@@ -151,6 +159,25 @@ const SignUp = () => {
                 ...signUpObject,
                 confirmPassword: e.target.value,
               });
+            }}
+          />
+        </div>
+        <div className="divField">
+        <TextField
+        required
+            type="text"
+            className="width-90"
+            id="standard-basic"
+            label="Email"
+            variant="standard"
+            onBlur={(e) => {
+              // let validation = validateEmail(e);
+              // if(!validation){
+              //     toast.error("Please enter valid email.")
+              // }
+            }}
+            onChange={(e) => {
+              setSignUpObject({ ...signUpObject, email: e.target.value });
             }}
           />
         </div>

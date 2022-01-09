@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { cookies } from '../../../utils/utils';
-import { addResturantAction } from '../../../actions/resturants';
+import { addResturantAction, getResturantAction, updateResturantAction } from '../../../actions/resturants';
 
 const Restaurent = () => {
   const dispatch = useDispatch();
@@ -15,10 +15,12 @@ const Restaurent = () => {
     restName:"",
     restAddress:"",
     restPhone:""
-  })
-  const { restObjectData } = useSelector((state) => {
+  });
+  let updateRest = false;
+  const { restObjectData,restGetObjectData } = useSelector((state) => {
     return {
       restObjectData: state.ResturantService.restObjectData,
+      restGetObjectData: state.ResturantService.restGetObjectData
     };
   });
   useEffect(()=>{
@@ -32,7 +34,26 @@ const Restaurent = () => {
       }
       
     }
-  },[restObjectData])
+  },[restObjectData]);
+  useEffect(()=>{
+    if(restGetObjectData.failure){
+      toast.error(restGetObjectData.msg);
+    }else{
+      if(restGetObjectData && restGetObjectData.data){
+        setRestObject(restGetObjectData && restGetObjectData.data);
+        history("/resturant");
+      }
+      
+    }
+  },[restGetObjectData]);
+  if(restGetObjectData && restGetObjectData.data){
+    updateRest = true;
+  }
+  useEffect(()=>{
+    if(cookies.get("login") === "true"){
+      dispatch(getResturantAction(cookies.get('USR_VLE')));
+    }
+  },[])
   const addResturantData = () =>{
     // history('/menus')
     if(restObject.restName){
@@ -42,7 +63,27 @@ const Restaurent = () => {
           restObject.modifiedDate = new Date().getTime();
           restObject.createdBy = cookies.get('USR_VLE');
           restObject.modifiedBy = cookies.get('USR_VLE');
+          restObject.userId = cookies.get('USR_VLE');
           dispatch(addResturantAction(restObject))
+        }else{
+          toast.error("Please enter resturant phone number.")
+        }
+      }else{
+        toast.error("Please enter resturant address.");
+      }
+    }else{
+      toast.error("Please enter resturant name.")
+    }
+  }
+
+  const updateResturantData = () =>{
+    if(restObject.restName){
+      if(restObject.restAddress){
+        if(restObject.restPhone){
+          restObject.modifiedDate = new Date().getTime();
+          restObject.modifiedBy = cookies.get('USR_VLE');
+          restObject.userId = cookies.get('USR_VLE');
+          dispatch(updateResturantAction(restObject))
         }else{
           toast.error("Please enter resturant phone number.")
         }
@@ -117,7 +158,7 @@ const Restaurent = () => {
           />
         </div>
         <div>
-            <Button variant="contained" className="menuBtnAdjustment" onClick={addResturantData}>Prepare Menu <ArrowForwardIosIcon /></Button>
+            {updateRest?<Button variant="contained" className="menuBtnAdjustment" onClick={updateResturantData}>Update Resturant<ArrowForwardIosIcon /></Button>:<Button variant="contained" className="menuBtnAdjustment" onClick={addResturantData}>Prepare Menu <ArrowForwardIosIcon /></Button>}
         </div>
             </div>
         </div>

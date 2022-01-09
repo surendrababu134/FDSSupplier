@@ -1,6 +1,7 @@
 import * as types from '../constants';
 const initialState = {
-    restObjectData:{}
+    restObjectData:{},
+    restGetObjectData:{}
 };
 
 function configReducer(state = initialState, action) {
@@ -9,7 +10,10 @@ function configReducer(state = initialState, action) {
             return {
                 ...state, restObjectData: action.data
             }
-        
+        case types.REST_GET_DETAILS:
+            return {
+                ...state, restGetObjectData: action.data
+            }
         default:
             return state;
     }
